@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">JEM Fit</string>
+    <string name="txt_lblUser">Erabiltzailea: </string>
+    <string name="txt_lblPassword">Pasahitza: </string>
+    <string name="txt_btnLogin">LOGIN</string>
+    <string name="txt_btnRegister">ERREGISTRATU</string>
+    <string name="txt_cbSaioaGogoratu">Saioa Gogoratu</string>
 </resources>
