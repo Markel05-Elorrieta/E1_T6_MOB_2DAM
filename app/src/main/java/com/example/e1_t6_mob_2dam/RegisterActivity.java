@@ -27,6 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Functions functions = new Functions();
 
         EditText nameIn = (EditText) findViewById(R.id.ptRegister_name);
         EditText surnameIn = (EditText) findViewById(R.id.ptRegister_surname);
@@ -42,9 +43,23 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                boolean userExists = functions.checkExistenceUserDB(userIn.getText().toString());
+                if (userExists) {
+                    builder.setTitle("Erregistroa txarto");
+                    builder.setMessage("Erabiltzailea existitzen da!");
+                    builder.setPositiveButton("Berriro sahiatu", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                } else {
+                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }

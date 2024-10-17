@@ -14,7 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import exceptions.ErrorUserNotFound;
+import exceptions.UserNotFound;
 import exceptions.ErrorWrongPassword;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 //try {
                 try {
                     functions.checkLogin(userIn.getText().toString(), passwordIn.getText().toString());
-                } catch (ErrorUserNotFound errorUserNotFound) {
+                } catch (UserNotFound errorUserNotFound) {
                     builder.setTitle("Login txarto");
                     builder.setMessage(errorUserNotFound.getMessage());
                     builder.setPositiveButton("Berriro sahiatu", new DialogInterface.OnClickListener() {

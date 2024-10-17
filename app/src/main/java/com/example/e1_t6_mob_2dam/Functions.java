@@ -3,28 +3,40 @@ package com.example.e1_t6_mob_2dam;
 import java.util.Date;
 
 import exceptions.ErrorWrongPassword;
-import exceptions.ErrorUserNotFound;
+import exceptions.UserNotFound;
 
 public class Functions {
 
-    public User searchUserDB (String userIn) throws ErrorUserNotFound {
+    public User searchUserDB (String userIn) throws UserNotFound {
         // Conexion a bd
         // Si no encuentra usuario con ese usuario -> Usuario null
         // Si lo encuentra devuelve el usuarui que sea
         Date d = new Date();
-        User userDB = new User("a", "a", "a", "a", d, 123456789);
-        //User userDB = null;
+        //User userDB = new User("a", "a", "a", "a", d, 123456789);
+        User userDB = null;
         if (userDB == null) {
-            throw new ErrorUserNotFound();
+            throw new UserNotFound();
         }
 
         return userDB;
     }
 
-    public void checkLogin(String userIn, String passwordIn) throws ErrorWrongPassword, ErrorUserNotFound {
+    public boolean checkExistenceUserDB (String userIn) {
+        try {
+            User userDB = this.searchUserDB(userIn);
+            return true;
+        } catch (UserNotFound userNotFound) {
+            return false;
+        }
+    }
+
+    public void checkLogin(String userIn, String passwordIn) throws ErrorWrongPassword, UserNotFound {
         User userDB = searchUserDB(userIn);
+
         if (!userDB.getErabiltzailea().toString().equals(userIn)){
             throw new ErrorWrongPassword();
+        } else {
+            // Guardar user en global???
         }
     }
     /*
