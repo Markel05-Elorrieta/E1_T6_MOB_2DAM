@@ -5,4 +5,12 @@
     <string name="txt_btnLogin">LOGIN</string>
     <string name="txt_btnRegister">ERREGISTRATU</string>
     <string name="txt_cbSaioaGogoratu">Saioa Gogoratu</string>
+
+    <string name="txt_lblPassword2">Pasahitza errepikatu:</string>
+    <string name="txt_lblName">Izena:</string>
+    <string name="txt_lblSurname">Abizena:</string>
+    <string name="txt_lblEmail">Email:</string>
+    <string name="txt_lblPhone">Telefonoa:</string>
+    <string name="txt_lblDate">Jaiotze-data:</string>
+
 </resources>
