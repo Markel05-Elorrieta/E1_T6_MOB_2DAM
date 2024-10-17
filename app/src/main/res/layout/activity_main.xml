@@ -9,18 +9,18 @@
 
 
     <TextView
-        android:id="@+id/tv_appName"
+        android:id="@+id/tvLogin_appName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_logo"
+        app:layout_constraintTop_toBottomOf="@+id/imgLogin_logo"
         app:layout_constraintVertical_bias="0.01999998" />
 
     <ImageView
-        android:id="@+id/img_logo"
+        android:id="@+id/imgLogin_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="center"
@@ -32,7 +32,7 @@
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <TextView
-        android:id="@+id/tv_user"
+        android:id="@+id/tvLogin_user"
         android:layout_width="124dp"
         android:layout_height="20dp"
         android:text="@string/txt_lblUser"
@@ -44,46 +44,44 @@
         app:layout_constraintVertical_bias="0.295" />
 
     <TextView
-        android:id="@+id/tv_password"
+        android:id="@+id/tvLogin_password"
         android:layout_width="124dp"
         android:layout_height="22dp"
         android:text="@string/txt_lblPassword"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/pt_user"
+        app:layout_constraintStart_toStartOf="@+id/ptLogin_user"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.482" />
 
     <EditText
-        android:id="@+id/pt_user"
-        android:layout_width="250dp"
+        android:id="@+id/ptLogin_user"
+        android:layout_width="325dp"
         android:layout_height="50dp"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_user"
+        app:layout_constraintStart_toStartOf="@+id/tvLogin_user"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.365"
-        />
+        app:layout_constraintVertical_bias="0.365" />
 
     <EditText
-        android:id="@+id/pt_password"
-        android:layout_width="250dp"
+        android:id="@+id/ptLogin_password"
+        android:layout_width="325dp"
         android:layout_height="50dp"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_password"
-        app:layout_constraintTop_toBottomOf="@+id/tv_password"
-        app:layout_constraintVertical_bias="0.063"
-        />
+        app:layout_constraintStart_toStartOf="@+id/tvLogin_password"
+        app:layout_constraintTop_toBottomOf="@+id/tvLogin_password"
+        app:layout_constraintVertical_bias="0.063" />
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btnLogin_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:text="@string/txt_btnLogin"
-        app:layout_constraintBottom_toTopOf="@+id/btn_register"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +89,7 @@
         app:layout_constraintVertical_bias="0.998" />
 
     <Button
-        android:id="@+id/btn_register"
+        android:id="@+id/btnLogin_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txt_btnRegister"
@@ -102,12 +100,12 @@
         app:layout_constraintVertical_bias="0.894" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/cbLogin_remember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txt_cbSaioaGogoratu"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/pt_password"
+        app:layout_constraintStart_toStartOf="@+id/ptLogin_password"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.663" />
 

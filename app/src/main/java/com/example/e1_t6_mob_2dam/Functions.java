@@ -7,17 +7,25 @@ import exceptions.ErrorUserNotFound;
 
 public class Functions {
 
-    public void checkLogin(String userIn, String passwordIn) throws ErrorWrongPassword, ErrorUserNotFound {
+    public User searchUserDB (String userIn) throws ErrorUserNotFound {
+        // Conexion a bd
+        // Si no encuentra usuario con ese usuario -> Usuario null
+        // Si lo encuentra devuelve el usuarui que sea
         Date d = new Date();
-        User u = new User("Magkel", "Magkel", "a", "a", d, 228473782);
-
-        if (!u.getErabiltzailea().toString().equals(userIn)){
-            throw new ErrorWrongPassword();
-        }
-        if (u == null) {
+        User userDB = new User("a", "a", "a", "a", d, 123456789);
+        //User userDB = null;
+        if (userDB == null) {
             throw new ErrorUserNotFound();
         }
 
+        return userDB;
+    }
+
+    public void checkLogin(String userIn, String passwordIn) throws ErrorWrongPassword, ErrorUserNotFound {
+        User userDB = searchUserDB(userIn);
+        if (!userDB.getErabiltzailea().toString().equals(userIn)){
+            throw new ErrorWrongPassword();
+        }
     }
     /*
     ConectionDB conection = new ConectionDB();

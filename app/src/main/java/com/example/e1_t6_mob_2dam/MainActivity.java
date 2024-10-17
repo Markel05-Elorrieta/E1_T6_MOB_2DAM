@@ -32,11 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
         Functions functions = new Functions();
 
-        Button btnLogin = (Button) findViewById(R.id.btn_login);
-        Button btnRegister = (Button) findViewById(R.id.btn_register);
-        EditText userIn = (EditText) findViewById(R.id.pt_user);
-        EditText passwordIn = (EditText) findViewById(R.id.pt_password);
+        Button btnLogin = (Button) findViewById(R.id.btnLogin_login);
+        Button btnRegister = (Button) findViewById(R.id.btnLogin_register);
+        EditText userIn = (EditText) findViewById(R.id.ptLogin_user);
+        EditText passwordIn = (EditText) findViewById(R.id.ptLogin_password);
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
