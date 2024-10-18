@@ -1,8 +1,5 @@
 package com.example.e1_t6_mob_2dam;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,6 +7,7 @@ import exceptions.ErrorWrongPassword;
 import exceptions.PasswordDoNotMatch;
 import exceptions.UserAlreadyExists;
 import exceptions.UserNotFound;
+import objects.User;
 
 public class Functions {
     public static ArrayList<User> users = new ArrayList<>();
@@ -42,7 +40,7 @@ public class Functions {
         if (!userDB.getPasahitza().toString().equals(passwordIn)){
             throw new ErrorWrongPassword();
         } else {
-            // Guardar user en global!!!
+            GlobalVariables.logedUser = userDB;
         }
     }
 

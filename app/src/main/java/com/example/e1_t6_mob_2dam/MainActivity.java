@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     functions.checkLogin(userIn.getText().toString(), passwordIn.getText().toString());
 
-                    Intent intent = new Intent(MainActivity.this, Workouts.class);
+                    Intent intent = new Intent(MainActivity.this, WorkoutsActivity.class);
                     startActivity(intent);
                     finish();
                 } catch (UserNotFound errorUserNotFound) {

@@ -1,4 +1,4 @@
-package com.example.e1_t6_mob_2dam;
+package objects;
 
 import java.util.Date;
 
@@ -11,7 +11,7 @@ public class User
     private Date jaiotze_data;
     private String email;
     private int telefonoa;
-    private int maila = 0;
+    private double maila = 0;
 
     public User(String izena, String abizenak, String erabiltzailea, String pasahitza, Date jaiotze_data, String email, int telefonoa) {
         this.izena = izena;
@@ -77,5 +77,13 @@ public class User
 
     public void setTelefonoa(int telefonoa) {
         this.telefonoa = telefonoa;
+    }
+
+    public double getMaila() {
+        return maila;
+    }
+
+    public void setMaila(double maila) {
+        this.maila = maila;
     }
 }
