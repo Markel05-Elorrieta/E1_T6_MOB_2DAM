@@ -22,6 +22,13 @@ import exceptions.UserAlreadyExists;
 import objects.User;
 
 public class RegisterActivity extends AppCompatActivity {
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         Functions functions = new Functions();
 
         EditText nameIn = (EditText) findViewById(R.id.ptRegister_name);
