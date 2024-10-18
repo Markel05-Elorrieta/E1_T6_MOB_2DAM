@@ -1,43 +1,71 @@
 package com.example.e1_t6_mob_2dam;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
+import java.util.ArrayList;
 import java.util.Date;
 
 import exceptions.ErrorWrongPassword;
+import exceptions.PasswordDoNotMatch;
+import exceptions.UserAlreadyExists;
 import exceptions.UserNotFound;
 
 public class Functions {
-
+    public static ArrayList<User> users = new ArrayList<>();
     public User searchUserDB (String userIn) throws UserNotFound {
         // Conexion a bd
         // Si no encuentra usuario con ese usuario -> Usuario null
         // Si lo encuentra devuelve el usuarui que sea
         Date d = new Date();
-        //User userDB = new User("a", "a", "a", "a", d, 123456789);
-        User userDB = null;
+        User userDB = new User("a", "a", "a", "a", d, "a" ,123456789);
+        users.add(userDB);
+        userDB = new User("b", "b", "b", "b", d, "b" ,123456789);;
+        users.add(userDB);
+
+        for (User user : users) {
+            if (user.getErabiltzailea().equals(userIn)){
+                return user;
+            }
+        }
+
+        throw new UserNotFound();
+        /*
         if (userDB == null) {
             throw new UserNotFound();
-        }
-
-        return userDB;
-    }
-
-    public boolean checkExistenceUserDB (String userIn) {
-        try {
-            User userDB = this.searchUserDB(userIn);
-            return true;
-        } catch (UserNotFound userNotFound) {
-            return false;
-        }
+        }*/
     }
 
     public void checkLogin(String userIn, String passwordIn) throws ErrorWrongPassword, UserNotFound {
         User userDB = searchUserDB(userIn);
 
-        if (!userDB.getErabiltzailea().toString().equals(userIn)){
+        if (!userDB.getPasahitza().toString().equals(passwordIn)){
             throw new ErrorWrongPassword();
         } else {
-            // Guardar user en global???
+            // Guardar user en global!!!
         }
+    }
+
+    public void checkRegister (String userIn, String passwordIn, String password2In) throws PasswordDoNotMatch, UserAlreadyExists {
+
+        try {
+            // Si encuentra usuario, me suelta exception de que el usuario existe
+            User userDB = searchUserDB(userIn);
+            throw new UserAlreadyExists();
+        } catch (UserNotFound e) {
+            // Si no encuentra usuario, hara las demas comprobaciones
+
+            // comprobar psw con psw2
+            if (!passwordIn.equals(password2In)) {
+                throw new PasswordDoNotMatch();
+            }
+
+            // comprobar fecha (falta!!)
+        }
+    }
+
+    public void insertNewUser(User userNew){
+        users.add(userNew);
     }
     /*
     ConectionDB conection = new ConectionDB();

@@ -44,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
                 //try {
                 try {
                     functions.checkLogin(userIn.getText().toString(), passwordIn.getText().toString());
+
+                    Intent intent = new Intent(MainActivity.this, Workouts.class);
+                    startActivity(intent);
+                    finish();
                 } catch (UserNotFound errorUserNotFound) {
                     builder.setTitle("Login txarto");
                     builder.setMessage(errorUserNotFound.getMessage());

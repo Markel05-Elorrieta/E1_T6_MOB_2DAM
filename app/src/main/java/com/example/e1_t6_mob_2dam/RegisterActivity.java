@@ -15,6 +15,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Date;
+
+import exceptions.NullField;
+import exceptions.PasswordDoNotMatch;
+import exceptions.UserAlreadyExists;
+
 public class RegisterActivity extends AppCompatActivity {
 
     @Override
@@ -43,10 +49,35 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean userExists = functions.checkExistenceUserDB(userIn.getText().toString());
-                if (userExists) {
-                    builder.setTitle("Erregistroa txarto");
-                    builder.setMessage("Erabiltzailea existitzen da!");
+                String txtName = nameIn.getText().toString();
+                String txtSurname = surnameIn.getText().toString();
+                String txtUser = userIn.getText().toString();
+                String txtPassword = passwordIn.getText().toString();
+                String txtPassword2 = passwordIn.getText().toString();
+                String txtDate = dateIn.getText().toString();
+                String txtEmail = emailIn.getText().toString();
+                String txtPhone = phoneIn.getText().toString();
+
+                try {
+                    if (txtName.equals("") || txtSurname.equals("") ||txtUser.equals("") || txtPassword.equals("") ||
+                            txtPassword2.equals("") || txtDate.equals("") ||txtEmail.equals("") || txtPhone.equals("")){
+                        throw new NullField();
+                    }
+
+                    functions.checkRegister(userIn.getText().toString(), passwordIn.getText().toString(),password2In.getText().toString());
+
+                    Date d = new Date(txtDate);
+                    User userNew = new User(txtName, txtSurname, txtUser, txtPassword, d, txtEmail, Integer.parseInt(txtPhone));
+
+                    functions.insertNewUser(userNew);
+
+                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                } catch (UserAlreadyExists userAlreadyExists) {
+                    builder.setTitle("Erregistro txarto");
+                    builder.setMessage(userAlreadyExists.getMessage());
                     builder.setPositiveButton("Berriro sahiatu", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -55,11 +86,31 @@ public class RegisterActivity extends AppCompatActivity {
                     });
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                } else {
-                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
                 }
+                catch (PasswordDoNotMatch passwordDoNotMatch) {
+                    builder.setTitle("Erregistro txarto");
+                    builder.setMessage(passwordDoNotMatch.getMessage());
+                    builder.setPositiveButton("Berriro sahiatu", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                } catch (NullField nullField) {
+                    builder.setTitle("Erregistro txarto");
+                    builder.setMessage(nullField.getMessage());
+                    builder.setPositiveButton("Berriro sahiatu", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+
             }
         });
     }

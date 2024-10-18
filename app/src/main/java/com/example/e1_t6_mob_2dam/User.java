@@ -9,14 +9,17 @@ public class User
     private String erabiltzailea;
     private String pasahitza;
     private Date jaiotze_data;
+    private String email;
     private int telefonoa;
+    private int maila = 0;
 
-    public User(String izena, String abizenak, String erabiltzailea, String pasahitza, Date jaiotze_data, int telefonoa) {
+    public User(String izena, String abizenak, String erabiltzailea, String pasahitza, Date jaiotze_data, String email, int telefonoa) {
         this.izena = izena;
         this.abizenak = abizenak;
         this.erabiltzailea = erabiltzailea;
         this.pasahitza = pasahitza;
         this.jaiotze_data = jaiotze_data;
+        this.email = email;
         this.telefonoa = telefonoa;
     }
 
@@ -58,6 +61,14 @@ public class User
 
     public void setJaiotze_data(Date jaiotze_data) {
         this.jaiotze_data = jaiotze_data;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getTelefonoa() {
