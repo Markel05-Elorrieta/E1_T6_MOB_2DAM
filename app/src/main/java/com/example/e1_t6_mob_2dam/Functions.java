@@ -9,6 +9,7 @@ import exceptions.UserAlreadyExists;
 import exceptions.UserNotFound;
 import objects.User;
 
+
 public class Functions {
     public static ArrayList<User> users = new ArrayList<>();
     public User searchUserDB (String userIn) throws UserNotFound {
@@ -16,9 +17,9 @@ public class Functions {
         // Si no encuentra usuario con ese usuario -> Usuario null
         // Si lo encuentra devuelve el usuarui que sea
         Date d = new Date();
-        User userDB = new User("a", "a", "a", "a", d, "a" ,123456789);
+        User userDB = new User("a", "a", "a", "a", d, "a" ,123456789, 2);
         users.add(userDB);
-        userDB = new User("b", "b", "b", "b", d, "b" ,123456789);;
+        userDB = new User("b", "b", "b", "b", d, "b" ,123456789, 3);;
         users.add(userDB);
 
         for (User user : users) {
@@ -28,10 +29,25 @@ public class Functions {
         }
 
         throw new UserNotFound();
-        /*
-        if (userDB == null) {
-            throw new UserNotFound();
-        }*/
+    }
+
+    public User searchUserDBById (Integer userIdIn) throws UserNotFound {
+        // Conexion a bd
+        // Si no encuentra usuario con ese usuario -> Usuario null
+        // Si lo encuentra devuelve el usuarui que sea
+        Date d = new Date();
+        User userDB = new User("a", "a", "a", "a", d, "a" ,123456789, 2);
+        users.add(userDB);
+        userDB = new User("b", "b", "b", "b", d, "b" ,123456789, 3);;
+        users.add(userDB);
+        int id = 0;
+        for (User user : users) {
+            if (id == userIdIn){
+                return user;
+            }
+        }
+
+        throw new UserNotFound();
     }
 
     public void checkLogin(String userIn, String passwordIn) throws ErrorWrongPassword, UserNotFound {

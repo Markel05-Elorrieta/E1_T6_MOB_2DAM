@@ -1,5 +1,7 @@
 [versions]
 agp = "8.6.0"
+bcrypt = "{0.4}"
+bcryptVersion = "0.4"
 firebaseBom = "32.3.1"
 firebaseFirestoreVersion = "24.8.0"
 junit = "4.13.2"
@@ -10,8 +12,11 @@ material = "1.12.0"
 activity = "1.9.2"
 constraintlayout = "2.1.4"
 firebaseFirestore = "25.1.0"
+toxicbakeryBcrypt = "1.0.9"
 
 [libraries]
+bcrypt = { module = "at.favre.lib:bcrypt", version.ref = "bcrypt" }
+bcrypt-v04 = { module = "at.favre.lib:bcrypt", version.ref = "bcryptVersion" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx", version.ref = "firebaseFirestoreVersion" }
@@ -24,6 +29,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
+toxicbakery-bcrypt = { module = "com.ToxicBakery.library.bcrypt:bcrypt", version.ref = "toxicbakeryBcrypt" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

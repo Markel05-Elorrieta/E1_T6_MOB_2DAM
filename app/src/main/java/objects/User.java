@@ -11,7 +11,10 @@ public class User
     private Date jaiotze_data;
     private String email;
     private int telefonoa;
-    private double maila = 0;
+    private int maila;
+
+    public User(){
+    }
 
     public User(String izena, String abizenak, String erabiltzailea, String pasahitza, Date jaiotze_data, String email, int telefonoa) {
         this.izena = izena;
@@ -21,6 +24,18 @@ public class User
         this.jaiotze_data = jaiotze_data;
         this.email = email;
         this.telefonoa = telefonoa;
+        this.maila = 0;
+    }
+
+    public User(String izena, String abizenak, String erabiltzailea, String pasahitza, Date jaiotze_data, String email, int telefonoa, int maila) {
+        this.izena = izena;
+        this.abizenak = abizenak;
+        this.erabiltzailea = erabiltzailea;
+        this.pasahitza = pasahitza;
+        this.jaiotze_data = jaiotze_data;
+        this.email = email;
+        this.telefonoa = telefonoa;
+        this.maila = maila;
     }
 
     public String getIzena() {
@@ -79,11 +94,7 @@ public class User
         this.telefonoa = telefonoa;
     }
 
-    public double getMaila() {
-        return maila;
-    }
+    public int getMaila() {return maila;}
 
-    public void setMaila(double maila) {
-        this.maila = maila;
-    }
+    public void setMaila(int maila) {this.maila = maila;}
 }
