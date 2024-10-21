@@ -84,39 +84,12 @@ public class RegisterActivity extends AppCompatActivity {
                     finish();
 
                 } catch (UserAlreadyExists userAlreadyExists) {
-                    builder.setTitle("Erregistro txarto");
-                    builder.setMessage(userAlreadyExists.getMessage());
-                    builder.setPositiveButton("Berriro sahiatu", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                    functions.alertDisplay(builder, "Erregistro txarto", userAlreadyExists.getMessage(), "Berriro sahiatu");
                 }
                 catch (PasswordDoNotMatch passwordDoNotMatch) {
-                    builder.setTitle("Erregistro txarto");
-                    builder.setMessage(passwordDoNotMatch.getMessage());
-                    builder.setPositiveButton("Berriro sahiatu", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                    functions.alertDisplay(builder, "Erregistro txarto", passwordDoNotMatch.getMessage(), "Berriro sahiatu");
                 } catch (NullField nullField) {
-                    builder.setTitle("Erregistro txarto");
-                    builder.setMessage(nullField.getMessage());
-                    builder.setPositiveButton("Berriro sahiatu", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                    functions.alertDisplay(builder, "Erregistro txarto", nullField.getMessage(), "Berriro sahiatu");
                 }
 
             }

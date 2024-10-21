@@ -22,7 +22,9 @@ public class WorkoutsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
         builder.setTitle("Login txarto");
         builder.setMessage(GlobalVariables.logedUser.getErabiltzailea() + ";" +GlobalVariables.logedUser.getMaila());
         builder.setPositiveButton("Berriro sahiatu", new DialogInterface.OnClickListener() {

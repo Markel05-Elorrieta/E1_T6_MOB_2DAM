@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
         Functions functions = new Functions();
-
         Cache cache = new Cache();
 
         cache.put("userloggedId", 1);
@@ -48,31 +47,15 @@ public class MainActivity extends AppCompatActivity {
         try {
             userId = cache.get("userloggedId");
         } catch (Exception e){}
+
         if (userId != -1) {
             try {
                 functions.searchUserDBById(userId);
 
-                builder.setTitle("aaaa");
-                builder.setMessage("encontrao");
-                builder.setPositiveButton("Berriro sahiatu", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                functions.alertDisplay(builder, "aaa", "encontrao", "Berriro Sahiatu");
             } catch (UserNotFound e) {
-                builder.setTitle("aaaa");
-                builder.setMessage("no encontrao");
-                builder.setPositiveButton("Berriro sahiatu", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+
+                functions.alertDisplay(builder, "aaa", "encontrao", "Berriro Sahiatu");
             }
         }
 
@@ -89,27 +72,9 @@ public class MainActivity extends AppCompatActivity {
                     finish();
 
                 } catch (UserNotFound errorUserNotFound) {
-                    builder.setTitle("Login txarto");
-                    builder.setMessage(errorUserNotFound.getMessage());
-                    builder.setPositiveButton("Berriro sahiatu", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                    functions.alertDisplay(builder, "Login txarto", errorUserNotFound.getMessage(), "Berriro sahiatu");
                 } catch (ErrorWrongPassword errorWrongPassword) {
-                    builder.setTitle("Login txarto");
-                    builder.setMessage(errorWrongPassword.getMessage());
-                    builder.setPositiveButton("Berriro sahiatu", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                    functions.alertDisplay(builder, "Login txarto", errorWrongPassword.getMessage(), "Berriro sahiatu");
                 }
             }
         });

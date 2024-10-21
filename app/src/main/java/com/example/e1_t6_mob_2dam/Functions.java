@@ -1,5 +1,8 @@
 package com.example.e1_t6_mob_2dam;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -80,6 +83,19 @@ public class Functions {
 
     public void insertNewUser(User userNew){
         users.add(userNew);
+    }
+
+    public void alertDisplay(AlertDialog.Builder builder, String title, String msg, String msgBtn){
+        builder.setTitle(title);
+        builder.setMessage(msg);
+        builder.setPositiveButton(msgBtn, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
     /*
     ConectionDB conection = new ConectionDB();
