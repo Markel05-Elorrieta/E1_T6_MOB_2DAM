@@ -2,6 +2,10 @@ package com.example.e1_t6_mob_2dam;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.util.Log;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,23 +19,44 @@ import objects.User;
 
 public class Functions {
     public static ArrayList<User> users = new ArrayList<>();
+    private ConectionDB conectionDB = new ConectionDB();
+    private User user;
+
+    // Comprobar error
     public User searchUserDB (String userIn) throws UserNotFound {
-        // Conexion a bd
-        // Si no encuentra usuario con ese usuario -> Usuario null
-        // Si lo encuentra devuelve el usuarui que sea
-        Date d = new Date();
-        User userDB = new User("a", "a", "a", "a", d, "a" ,123456789, 2);
-        users.add(userDB);
-        userDB = new User("b", "b", "b", "b", d, "b" ,123456789, 3);;
-        users.add(userDB);
+        FirebaseFirestore db = conectionDB.getConnection();
+        db.collection("erabiltzaileak")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            this.user = new User(
+                                    document.getString("izena"),
+                                    document.getString("abizenak"),
+                                    document.getString("erabiltzailea"),
+                                    document.getString("pasahitza"),
+                                    document.getDate("jaiotze_data"),
+                                    document.getString("email"),
+                                    document.getDouble("telefonoa").intValue(),
+                                    document.getDouble("maila").intValue()
+                            );
+                            Log.d("DBCon", this.user.getErabiltzailea() + " / " + userIn);
+                            if (this.user.getErabiltzailea().equals(userIn)){
+                                break;
+                            } else {
+                                this.user = null;
+                            }
+                        }
+                    } else {
+                        // TaskDialog throw exception conection casca
+                        Log.d("casca", "casca");
+                    }
+                });
 
-        for (User user : users) {
-            if (user.getErabiltzailea().equals(userIn)){
-                return user;
-            }
+        if (this.user == null){
+            throw new UserNotFound();
         }
-
-        throw new UserNotFound();
+        return this.user;
     }
 
     public User searchUserDBById (Integer userIdIn) throws UserNotFound {
@@ -54,10 +79,10 @@ public class Functions {
     }
 
     public void checkLogin(String userIn, String passwordIn) throws ErrorWrongPassword, UserNotFound {
-        User userDB = searchUserDB(userIn);
-
-        if (!userDB.getPasahitza().toString().equals(passwordIn)){
-            throw new ErrorWrongPassword();
+            User userDB = searchUserDB(userIn);
+            Log.d("llegar", userDB.toString());
+          if (!userDB.getPasahitza().equals(passwordIn)){
+                throw new ErrorWrongPassword();
         } else {
             GlobalVariables.logedUser = userDB;
         }

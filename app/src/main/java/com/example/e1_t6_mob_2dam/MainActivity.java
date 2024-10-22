@@ -39,9 +39,6 @@ public class MainActivity extends AppCompatActivity {
         EditText passwordIn = (EditText) findViewById(R.id.ptLogin_password);
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-        ConectionDB c = new ConectionDB();
-        c.initializeDatabase();
-
         Functions functions = new Functions();
 
         /**********CACHE*******/
