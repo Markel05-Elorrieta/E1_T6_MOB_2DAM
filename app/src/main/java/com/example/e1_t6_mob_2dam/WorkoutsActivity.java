@@ -3,12 +3,17 @@ package com.example.e1_t6_mob_2dam;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import kotlinx.coroutines.channels.BufferOverflow;
 
 public class WorkoutsActivity extends AppCompatActivity {
 

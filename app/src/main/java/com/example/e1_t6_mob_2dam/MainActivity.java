@@ -14,7 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import org.checkerframework.checker.units.qual.C;
+
 
 import exceptions.UserNotFound;
 import exceptions.ErrorWrongPassword;
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         ConectionDB c = new ConectionDB();
         c.initializeDatabase();
+
         Functions functions = new Functions();
 
         /**********CACHE*******/
