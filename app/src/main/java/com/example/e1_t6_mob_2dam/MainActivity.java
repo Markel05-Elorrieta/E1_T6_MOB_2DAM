@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         Functions functions = new Functions();
 
         /**********CACHE*******/
+        /*
         Cache cache = new Cache();
         cache.put("userloggedId", 1);
         int userId = -1;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
                 functions.alertDisplay(builder, "aaa", "encontrao", "Berriro Sahiatu");
             }
-        }
+        }*/
         /******************/
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
