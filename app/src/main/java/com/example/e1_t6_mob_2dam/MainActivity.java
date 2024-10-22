@@ -14,6 +14,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import org.checkerframework.checker.units.qual.C;
+
 import exceptions.UserNotFound;
 import exceptions.ErrorWrongPassword;
 import objects.Cache;
@@ -37,12 +39,13 @@ public class MainActivity extends AppCompatActivity {
         EditText passwordIn = (EditText) findViewById(R.id.ptLogin_password);
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
+        ConectionDB c = new ConectionDB();
+        c.initializeDatabase();
         Functions functions = new Functions();
+
+        /**********CACHE*******/
         Cache cache = new Cache();
-
         cache.put("userloggedId", 1);
-
-
         int userId = -1;
         try {
             userId = cache.get("userloggedId");
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 functions.alertDisplay(builder, "aaa", "encontrao", "Berriro Sahiatu");
             }
         }
+        /******************/
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
 
                     functions.checkLogin(userIn.getText().toString(), passwordIn.getText().toString());
+
 
                     Intent intent = new Intent(MainActivity.this, WorkoutsActivity.class);
                     startActivity(intent);
@@ -88,6 +93,6 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
+
 }

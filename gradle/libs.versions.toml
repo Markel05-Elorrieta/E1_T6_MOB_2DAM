@@ -13,6 +13,7 @@ activity = "1.9.2"
 constraintlayout = "2.1.4"
 firebaseFirestore = "25.1.0"
 toxicbakeryBcrypt = "1.0.9"
+firebaseCommon = "21.0.0"
 
 [libraries]
 bcrypt = { module = "at.favre.lib:bcrypt", version.ref = "bcrypt" }
@@ -30,6 +31,7 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 toxicbakery-bcrypt = { module = "com.ToxicBakery.library.bcrypt:bcrypt", version.ref = "toxicbakeryBcrypt" }
+firebase-common = { group = "com.google.firebase", name = "firebase-common", version.ref = "firebaseCommon" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

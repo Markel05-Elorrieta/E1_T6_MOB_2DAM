@@ -5,16 +5,46 @@ package com.example.e1_t6_mob_2dam;
 //import com.google.firebase.firestore.FirebaseFirestore;
 //import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
-import java.io.FileInputStream;
+import android.util.Log;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+
+
+
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+
+import objects.User;
+
 
 public class ConectionDB {
-    /*public FirebaseFirestore getConnection() throws Exception {
-        //FileInputStream serviceAccount = new FileInputStream("C:\\Users\\in2dm3-d\\Downloads\\JEM_private_key.json");
+    public void initializeDatabase() {
+        System.out.println("inicio");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        return db;
+        db.collection("erabiltzaileak")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        System.out.println("documentufuera");
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Log.d("Firestore", document.getId() + " => " + document.getData());
+                            User user = new User(
+                                    document.getString("erabiltzailea"),
+                                    document.getString("izena"),
+                                    document.getString("abizenak"),
+                                    document.getString("pasahitza"),
+                                    document.getDate("jaiotze_data"),
+                                    document.getString("email"),
+                                    document.getDouble("telefonoa").intValue(),
+                                    document.getDouble("maila").intValue()
+                            );
+                            Log.d("hola", user.getErabiltzailea());
+                        }
+                    } else {
+                        System.out.println("erroresvarios");
+                        Log.w("Firestore", "Error getting documents.", task.getException());
+                    }
+                });
+        System.out.println("fin");
     }
-
-    public void closeConnection(FirebaseFirestore db) throws Exception {
-        db.terminate();
-    }*/
 }
