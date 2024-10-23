@@ -15,9 +15,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import dao.UserDao;
+import dao.WorkoutDao;
 import exceptions.ErrorWrongPassword;
 import exceptions.UserNotFound;
 import objects.Cache;
+import objects.Workout;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -32,8 +35,8 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
-        ConectionDB conectionDB = new ConectionDB();
-        conectionDB.getUsers();
+        UserDao userDao = new UserDao();
+        userDao.getUsers();
 
         Button btnLogin = (Button) findViewById(R.id.btnLogin_login);
         Button btnRegister = (Button) findViewById(R.id.btnLogin_register);
@@ -44,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Functions functions = new Functions();
         Cache cache = new Cache();
+        WorkoutDao workoutDao = new WorkoutDao();
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +59,8 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("entro", "entro");
                         cache.put("rememberUser", GlobalVariables.logedUser.getErabiltzailea());
                     }
+
+                    workoutDao.getWorkouts();
 
                     Intent intent = new Intent(LoginActivity.this, WorkoutsActivity.class);
                     startActivity(intent);

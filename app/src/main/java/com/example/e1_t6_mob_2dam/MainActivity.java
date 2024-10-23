@@ -19,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 
+import dao.UserDao;
 import exceptions.UserNotFound;
 import exceptions.ErrorWrongPassword;
 import objects.Cache;
@@ -36,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        ConectionDB conectionDB = new ConectionDB();
-        ArrayList<User> usersList = conectionDB.getUsers();
+        UserDao userDao = new UserDao();
+        ArrayList<User> usersList = userDao.getUsers();
 
         Boolean cacheUserExist = false;
         Cache cache = new Cache();

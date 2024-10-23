@@ -2,9 +2,9 @@ package com.example.e1_t6_mob_2dam;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -12,8 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import kotlinx.coroutines.channels.BufferOverflow;
+import objects.Workout;
 
 public class WorkoutsActivity extends AppCompatActivity {
 
@@ -28,6 +30,22 @@ public class WorkoutsActivity extends AppCompatActivity {
             return insets;
         });
 
+        RecyclerView rv = findViewById(R.id.rvWorkout_list);
+        Button w = (Button) findViewById(R.id.button54);
+        w.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(WorkoutsActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        AdapterWorkoutList a = new AdapterWorkoutList(this, GlobalVariables.workoutsDB);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        // Attach the adapter to the RecyclerView
+        rv.setAdapter(a);
+/*
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setTitle("Login txarto");
@@ -39,6 +57,6 @@ public class WorkoutsActivity extends AppCompatActivity {
             }
         });
         AlertDialog dialog = builder.create();
-        dialog.show();
+        dialog.show();*/
     }
 }
