@@ -12,5 +12,6 @@
     <string name="txt_lblEmail">Email:</string>
     <string name="txt_lblPhone">Telefonoa:</string>
     <string name="txt_lblDate">Jaiotze-data:</string>
+    <string name="txt_btnAtzera">Atzera</string>
 
 </resources>

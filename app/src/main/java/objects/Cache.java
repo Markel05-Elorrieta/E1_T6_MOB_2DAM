@@ -3,13 +3,13 @@ package objects;
 import java.util.HashMap;
 
 public class Cache {
-    private HashMap<String, Integer> cache = new HashMap<String, Integer>();
+    private HashMap<String, String> cache = new HashMap<String, String>();
 
-    public void put(String key, Integer value) {
+    public void put(String key, String value) {
         cache.put(key, value);
     }
 
-    public Integer get(String key) {
+    public String get(String key) {
         return cache.get(key);
     }
 }

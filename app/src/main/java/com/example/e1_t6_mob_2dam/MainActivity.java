@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
@@ -33,42 +35,46 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        ConectionDB conectionDB = new ConectionDB();
+        conectionDB.getUsers();
+
         Button btnLogin = (Button) findViewById(R.id.btnLogin_login);
         Button btnRegister = (Button) findViewById(R.id.btnLogin_register);
         EditText userIn = (EditText) findViewById(R.id.ptLogin_user);
         EditText passwordIn = (EditText) findViewById(R.id.ptLogin_password);
+        CheckBox rememberIn = findViewById(R.id.cbLogin_remember);
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
         Functions functions = new Functions();
+        Cache cache = new Cache();
 
         /**********CACHE*******/
-        /*
-        Cache cache = new Cache();
-        cache.put("userloggedId", 1);
-        int userId = -1;
         try {
-            userId = cache.get("userloggedId");
-        } catch (Exception e){}
+            String userCache = cache.get("rememberUser");
+            for (int i = 0; i < GlobalVariables.usersDB.size(); i++) {
+                if (GlobalVariables.usersDB.get(i).getErabiltzailea().equals(userCache)){
+                    GlobalVariables.logedUser = GlobalVariables.usersDB.get(i);
 
-        if (userId != -1) {
-            try {
-                functions.searchUserDBById(userId);
-
-                functions.alertDisplay(builder, "aaa", "encontrao", "Berriro Sahiatu");
-            } catch (UserNotFound e) {
-
-                functions.alertDisplay(builder, "aaa", "encontrao", "Berriro Sahiatu");
+                    Intent intent = new Intent(MainActivity.this, WorkoutsActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
-        }*/
-        /******************/
+
+        } catch (Exception e){
+        }
+
+        /*************************/
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //try {
                 try {
-
                     functions.checkLogin(userIn.getText().toString(), passwordIn.getText().toString());
+
+                    if (rememberIn.isChecked()){
+                        cache.put("rememberUser", GlobalVariables.logedUser.getErabiltzailea());
+                    }
 
 
                     Intent intent = new Intent(MainActivity.this, WorkoutsActivity.class);

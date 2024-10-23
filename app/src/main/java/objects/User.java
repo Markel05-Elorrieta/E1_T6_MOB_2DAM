@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class User
 {
+    private int id = -1;
     private String izena;
     private String abizenak;
     private String erabiltzailea;
@@ -27,7 +28,8 @@ public class User
         this.maila = 0;
     }
 
-    public User(String izena, String abizenak, String erabiltzailea, String pasahitza, Date jaiotze_data, String email, int telefonoa, int maila) {
+    public User(int id, String izena, String abizenak, String erabiltzailea, String pasahitza, Date jaiotze_data, String email, int telefonoa, int maila) {
+        this.id = id;
         this.izena = izena;
         this.abizenak = abizenak;
         this.erabiltzailea = erabiltzailea;
@@ -97,4 +99,12 @@ public class User
     public int getMaila() {return maila;}
 
     public void setMaila(int maila) {this.maila = maila;}
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

@@ -7,8 +7,12 @@ import android.util.Log;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Objects;
 
 import exceptions.ErrorWrongPassword;
 import exceptions.PasswordDoNotMatch;
@@ -24,54 +28,10 @@ public class Functions {
 
     // Comprobar error
     public User searchUserDB (String userIn) throws UserNotFound {
-        FirebaseFirestore db = conectionDB.getConnection();
-        db.collection("erabiltzaileak")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            this.user = new User(
-                                    document.getString("izena"),
-                                    document.getString("abizenak"),
-                                    document.getString("erabiltzailea"),
-                                    document.getString("pasahitza"),
-                                    document.getDate("jaiotze_data"),
-                                    document.getString("email"),
-                                    document.getDouble("telefonoa").intValue(),
-                                    document.getDouble("maila").intValue()
-                            );
-                            Log.d("DBCon", this.user.getErabiltzailea() + " / " + userIn);
-                            if (this.user.getErabiltzailea().equals(userIn)){
-                                break;
-                            } else {
-                                this.user = null;
-                            }
-                        }
-                    } else {
-                        // TaskDialog throw exception conection casca
-                        Log.d("casca", "casca");
-                    }
-                });
-
-        if (this.user == null){
-            throw new UserNotFound();
-        }
-        return this.user;
-    }
-
-    public User searchUserDBById (Integer userIdIn) throws UserNotFound {
-        // Conexion a bd
-        // Si no encuentra usuario con ese usuario -> Usuario null
-        // Si lo encuentra devuelve el usuarui que sea
-        Date d = new Date();
-        User userDB = new User("a", "a", "a", "a", d, "a" ,123456789, 2);
-        users.add(userDB);
-        userDB = new User("b", "b", "b", "b", d, "b" ,123456789, 3);;
-        users.add(userDB);
-        int id = 0;
-        for (User user : users) {
-            if (id == userIdIn){
-                return user;
+        for (int i = 0; i < GlobalVariables.usersDB.size(); i++) {
+            if (GlobalVariables.usersDB.get(i).getErabiltzailea().equals(userIn)) {
+                 User userAux = GlobalVariables.usersDB.get(i);
+                return userAux;
             }
         }
 
@@ -79,10 +39,9 @@ public class Functions {
     }
 
     public void checkLogin(String userIn, String passwordIn) throws ErrorWrongPassword, UserNotFound {
-            User userDB = searchUserDB(userIn);
-            Log.d("llegar", userDB.toString());
-          if (!userDB.getPasahitza().equals(passwordIn)){
-                throw new ErrorWrongPassword();
+        User userDB = searchUserDB(userIn);
+        if (!BCrypt.checkpw(passwordIn, userDB.getPasahitza())){
+            throw new ErrorWrongPassword();
         } else {
             GlobalVariables.logedUser = userDB;
         }
@@ -91,23 +50,36 @@ public class Functions {
     public void checkRegister (String userIn, String passwordIn, String password2In) throws PasswordDoNotMatch, UserAlreadyExists {
 
         try {
-            // Si encuentra usuario, me suelta exception de que el usuario existe
             User userDB = searchUserDB(userIn);
             throw new UserAlreadyExists();
         } catch (UserNotFound e) {
-            // Si no encuentra usuario, hara las demas comprobaciones
-
-            // comprobar psw con psw2
             if (!passwordIn.equals(password2In)) {
                 throw new PasswordDoNotMatch();
             }
-
             // comprobar fecha (falta!!)
         }
     }
 
     public void insertNewUser(User userNew){
-        users.add(userNew);
+        FirebaseFirestore db = conectionDB.getConnection();
+
+        HashMap<String, Object> userNewHashMap = new HashMap<>();
+        userNewHashMap.put("erabiltzailea", userNew.getErabiltzailea());
+        userNewHashMap.put("izena", userNew.getIzena());
+        userNewHashMap.put("abizenak", userNew.getAbizenak());
+        userNewHashMap.put("pasahitza", BCrypt.hashpw(userNew.getPasahitza(), BCrypt.gensalt()));
+        userNewHashMap.put("email", userNew.getEmail());
+        userNewHashMap.put("maila", userNew.getMaila());
+        userNewHashMap.put("telefonoa", userNew.getTelefonoa());
+        userNewHashMap.put("jaiotze-data", userNew.getJaiotze_data());
+
+        db.collection("erabiltzaileak").add(userNewHashMap).addOnSuccessListener(documentReference -> {
+                    Log.d("Firestore", "DocumentSnapshot added with ID: " + documentReference.getId());
+                })
+                .addOnFailureListener(e -> {
+                    Log.w("Firestore", "Error adding document", e);
+                });
+
     }
 
     public void alertDisplay(AlertDialog.Builder builder, String title, String msg, String msgBtn){

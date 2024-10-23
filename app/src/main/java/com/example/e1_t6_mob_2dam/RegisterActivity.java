@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import exceptions.NullField;
 import exceptions.PasswordDoNotMatch;
@@ -52,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText emailIn = (EditText) findViewById(R.id.etRegister_email);
         EditText phoneIn = (EditText) findViewById(R.id.ptRegister_phone);
         Button btnRegister = (Button) findViewById(R.id.btnRegister_register);
+        Button btnAtzera = (Button) findViewById(R.id.btnRegister_atzera);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -75,8 +77,8 @@ public class RegisterActivity extends AppCompatActivity {
                     functions.checkRegister(userIn.getText().toString(), passwordIn.getText().toString(),password2In.getText().toString());
 
                     Date d = new Date(txtDate);
-                    User userNew = new User(txtName, txtSurname, txtUser, txtPassword, d, txtEmail, Integer.parseInt(txtPhone));
 
+                    User userNew = new User(txtName, txtSurname, txtUser, txtPassword, d, txtEmail, Integer.parseInt(txtPhone));
                     functions.insertNewUser(userNew);
 
                     Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
@@ -92,6 +94,15 @@ public class RegisterActivity extends AppCompatActivity {
                     functions.alertDisplay(builder, "Erregistro txarto", nullField.getMessage(), "Berriro sahiatu");
                 }
 
+            }
+        });
+
+        btnAtzera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
