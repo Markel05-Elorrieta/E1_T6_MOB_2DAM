@@ -17,6 +17,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 
+import java.util.ArrayList;
 
 import exceptions.UserNotFound;
 import exceptions.ErrorWrongPassword;
@@ -36,68 +37,38 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ConectionDB conectionDB = new ConectionDB();
-        conectionDB.getUsers();
+        ArrayList<User> usersList = conectionDB.getUsers();
 
-        Button btnLogin = (Button) findViewById(R.id.btnLogin_login);
-        Button btnRegister = (Button) findViewById(R.id.btnLogin_register);
-        EditText userIn = (EditText) findViewById(R.id.ptLogin_user);
-        EditText passwordIn = (EditText) findViewById(R.id.ptLogin_password);
-        CheckBox rememberIn = findViewById(R.id.cbLogin_remember);
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-
-        Functions functions = new Functions();
+        Boolean cacheUserExist = false;
         Cache cache = new Cache();
 
         /**********CACHE*******/
+        /*
         try {
             String userCache = cache.get("rememberUser");
-            for (int i = 0; i < GlobalVariables.usersDB.size(); i++) {
-                if (GlobalVariables.usersDB.get(i).getErabiltzailea().equals(userCache)){
-                    GlobalVariables.logedUser = GlobalVariables.usersDB.get(i);
-
-                    Intent intent = new Intent(MainActivity.this, WorkoutsActivity.class);
-                    startActivity(intent);
-                    finish();
+            Log.d("entro", userCache);
+            for (int i = 0; i < usersList.size(); i++) {
+                if (usersList.get(i).getErabiltzailea().equals(userCache)) {
+                    GlobalVariables.logedUser = usersList.get(i);
+                    cacheUserExist = true;
                 }
             }
-
         } catch (Exception e){
+            e.printStackTrace();
         }
+        */
+        /*************/
 
-        /*************************/
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    functions.checkLogin(userIn.getText().toString(), passwordIn.getText().toString());
-
-                    if (rememberIn.isChecked()){
-                        cache.put("rememberUser", GlobalVariables.logedUser.getErabiltzailea());
-                    }
-
-
-                    Intent intent = new Intent(MainActivity.this, WorkoutsActivity.class);
-                    startActivity(intent);
-                    finish();
-
-                } catch (UserNotFound errorUserNotFound) {
-                    functions.alertDisplay(builder, "Login txarto", errorUserNotFound.getMessage(), "Berriro sahiatu");
-                } catch (ErrorWrongPassword errorWrongPassword) {
-                    functions.alertDisplay(builder, "Login txarto", errorWrongPassword.getMessage(), "Berriro sahiatu");
-                }
-            }
-        });
-
-
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            if (!cacheUserExist) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Intent intent = new Intent(MainActivity.this, WorkoutsActivity.class);
                 startActivity(intent);
                 finish();
             }
-        });
-    }
 
+
+    }
 }

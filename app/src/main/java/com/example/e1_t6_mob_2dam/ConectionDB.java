@@ -31,8 +31,8 @@ public class ConectionDB {
         db.terminate();
     }
 
-    public void getUsers(){
-        GlobalVariables.usersDB = new ArrayList<User>();
+    public ArrayList<User> getUsers(){
+        ArrayList <User> usersDBAux = new ArrayList<User>();
 
         FirebaseFirestore db = this.getConnection();
         db.collection("erabiltzaileak").get().addOnCompleteListener(task -> {
@@ -50,7 +50,8 @@ public class ConectionDB {
                             document.getDouble("telefonoa").intValue(),
                             document.getDouble("maila").intValue()
                     );
-                    GlobalVariables.usersDB.add(userDB);
+
+                    usersDBAux.add(userDB);
                     cont++;
                 }
             } else {
@@ -58,6 +59,8 @@ public class ConectionDB {
             }
             Log.d("DBFinish", "finish" + GlobalVariables.usersDB.size());
         });
+        GlobalVariables.usersDB = usersDBAux;
+        return usersDBAux;
     }
 
 /*

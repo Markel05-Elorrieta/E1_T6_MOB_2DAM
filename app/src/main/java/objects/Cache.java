@@ -1,5 +1,7 @@
 package objects;
 
+import android.util.Log;
+
 import java.util.HashMap;
 
 public class Cache {
@@ -10,6 +12,7 @@ public class Cache {
     }
 
     public String get(String key) {
+        Log.d("cacheV", cache.get(key));
         return cache.get(key);
     }
 }
