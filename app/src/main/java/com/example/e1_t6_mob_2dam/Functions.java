@@ -5,15 +5,14 @@ import android.content.DialogInterface;
 import android.util.Log;
 
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Objects;
 
+import CallBacks.UserCallBack;
+import dao.UserDao;
 import exceptions.ErrorWrongPassword;
 import exceptions.PasswordDoNotMatch;
 import exceptions.UserAlreadyExists;
@@ -34,14 +33,25 @@ public class Functions {
                 return userAux;
             }
         }
-
         throw new UserNotFound();
     }
-
+/*
     public void checkLogin(String userIn, String passwordIn) throws ErrorWrongPassword, UserNotFound {
         User userDB = searchUserDB(userIn);
         if (!BCrypt.checkpw(passwordIn, userDB.getPasahitza())){
             throw new ErrorWrongPassword();
+        } else {
+            GlobalVariables.logedUser = userDB;
+        }
+    }
+*/
+    public void checkLogin(User userDB, String passwordIn) throws ErrorWrongPassword, UserNotFound {
+       Log.d("pruebabasedatos", userDB.toString());
+        if (userDB.getErabiltzailea() == null) {
+            throw new UserNotFound();
+        }
+        else if (!BCrypt.checkpw(passwordIn, userDB.getPasahitza())) {
+                throw new ErrorWrongPassword();
         } else {
             GlobalVariables.logedUser = userDB;
         }

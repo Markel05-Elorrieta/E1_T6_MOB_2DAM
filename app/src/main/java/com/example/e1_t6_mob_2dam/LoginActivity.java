@@ -3,7 +3,6 @@ package com.example.e1_t6_mob_2dam;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,11 +17,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 
+import CallBacks.UserCallBack;
+import CallBacks.WorkoutCallBack;
 import dao.UserDao;
 import dao.WorkoutDao;
 import exceptions.ErrorWrongPassword;
 import exceptions.UserNotFound;
 import objects.Cache;
+import objects.User;
 import objects.Workout;
 
 
@@ -53,34 +55,48 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    functions.checkLogin(userIn.getText().toString(), passwordIn.getText().toString());
 
-                    if (rememberIn.isChecked()){
-                        Log.d("entro", "entro");
-                        cache.put("rememberUser", GlobalVariables.logedUser.getErabiltzailea());
-                    }
+                    //functions.checkLogin(userIn.getText().toString(), passwordIn.getText().toString());
 
-                    WorkoutDao workoutDao = new WorkoutDao();
-                    workoutDao.getWorkouts(new WorkoutCallBack() {
-                        @Override
-                        public void onWorkoutsRetrieved(ArrayList<Workout> workouts) {
-                            // Proceed to WorkoutsActivity only after the workouts are retrieved
-                            Intent intent = new Intent(LoginActivity.this, WorkoutsActivity.class);
-                            startActivity(intent);
-                            finish(); // Optional: Call finish() if you want to close LoginActivity
-                        }
-                    });
+                    UserDao userDao = new UserDao();
+                    userDao.searchUserDBByUser(userIn.getText().toString(), new UserCallBack() {
+                            @Override
+                            public void userRetrieved(User userOut) {
+                                try {
+                                    functions.checkLogin(userOut, passwordIn.getText().toString());
+
+                                    if (rememberIn.isChecked()){
+                                        Log.d("entro", "entro");
+                                        cache.put("rememberUser", GlobalVariables.logedUser.getErabiltzailea());
+                                    }
+
+                                    WorkoutDao workoutDao = new WorkoutDao();
+                                    workoutDao.getWorkouts(new WorkoutCallBack() {
+                                        @Override
+                                        public void onWorkoutsRetrieved(ArrayList<Workout> workouts) {
+                                            // Proceed to WorkoutsActivity only after the workouts are retrieved
+                                            Intent intent = new Intent(LoginActivity.this, WorkoutsActivity.class);
+                                            startActivity(intent);
+                                            finish(); // Optional: Call finish() if you want to close LoginActivity
+                                        }
+                                    });
+                                } catch (ErrorWrongPassword errorWrongPassword) {
+                                    functions.alertDisplay(builder, "Login txarto", errorWrongPassword.getMessage(), "Berriro sahiatu");
+                                } catch (UserNotFound userNotFound) {
+                                    functions.alertDisplay(builder, "Login txarto", userNotFound.getMessage(), "Berriro sahiatu");
+                                }
+                            }
+                        });
+
+
+
+
 /*
                     Intent intent = new Intent(LoginActivity.this, WorkoutsActivity.class);
                     startActivity(intent);
                     finish();
 */
-                } catch (UserNotFound errorUserNotFound) {
-                    functions.alertDisplay(builder, "Login txarto", errorUserNotFound.getMessage(), "Berriro sahiatu");
-                } catch (ErrorWrongPassword errorWrongPassword) {
-                    functions.alertDisplay(builder, "Login txarto", errorWrongPassword.getMessage(), "Berriro sahiatu");
-                }
+
             }
         });
 

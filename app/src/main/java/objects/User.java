@@ -107,4 +107,19 @@ public class User
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", izena='" + izena + '\'' +
+                ", abizenak='" + abizenak + '\'' +
+                ", erabiltzailea='" + erabiltzailea + '\'' +
+                ", pasahitza='" + pasahitza + '\'' +
+                ", jaiotze_data=" + jaiotze_data +
+                ", email='" + email + '\'' +
+                ", telefonoa=" + telefonoa +
+                ", maila=" + maila +
+                '}';
+    }
 }

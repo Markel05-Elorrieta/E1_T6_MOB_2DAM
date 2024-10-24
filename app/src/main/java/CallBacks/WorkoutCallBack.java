@@ -1,5 +1,5 @@
 // WorkoutCallBack.java
-package com.example.e1_t6_mob_2dam;
+package CallBacks;
 
 import java.util.ArrayList;
 import objects.Workout;

@@ -23,6 +23,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 import dao.WorkoutDao;
+import objects.User;
 import objects.Workout;
 
 public class WorkoutsActivity extends AppCompatActivity {
@@ -45,6 +46,8 @@ public class WorkoutsActivity extends AppCompatActivity {
         atzeraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GlobalVariables.logedUser = new User();
+
                 Intent intent = new Intent(WorkoutsActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();

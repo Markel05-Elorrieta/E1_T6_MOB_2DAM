@@ -30,35 +30,4 @@ public class ConectionDB {
     public void closeConnection(FirebaseFirestore db){
         db.terminate();
     }
-
-/*
-    public void initializeDatabase() {
-        System.out.println("inicio");
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("erabiltzaileak")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        System.out.println("documentufuera");
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Log.d("Firestore", document.getId() + " => " + document.getData());
-                            User user = new User(
-                                    document.getString("izena"),
-                                    document.getString("abizenak"),
-                                    document.getString("erabiltzailea"),
-                                    document.getString("pasahitza"),
-                                    document.getDate("jaiotze_data"),
-                                    document.getString("email"),
-                                    document.getDouble("telefonoa").intValue(),
-                                    document.getDouble("maila").intValue()
-                            );
-                            Log.d("DBCon", user.getErabiltzailea());
-                        }
-                    } else {
-                        System.out.println("erroresvarios");
-                        Log.w("Firestore", "Error getting documents.", task.getException());
-                    }
-                });
-        System.out.println("fin");
-    }*/
 }
