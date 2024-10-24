@@ -19,12 +19,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Date;
 import java.util.HashMap;
 
+import CallBacks.UserCallBack;
+import dao.UserDao;
 import exceptions.NullField;
 import exceptions.PasswordDoNotMatch;
 import exceptions.UserAlreadyExists;
 import objects.User;
 
 public class RegisterActivity extends AppCompatActivity {
+    private UserDao userDao = new UserDao();
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -76,22 +80,29 @@ public class RegisterActivity extends AppCompatActivity {
                         throw new NullField();
                     }
 
-                    functions.checkRegister(userIn.getText().toString(), passwordIn.getText().toString(),password2In.getText().toString());
+                    userDao.searchUserDBByUser(userIn.getText().toString(), new UserCallBack() {
+                        @Override
+                        public void userRetrieved(User userOut) {
+                            try {
+                                functions.checkRegister(userOut, passwordIn.getText().toString(),password2In.getText().toString());
 
-                    Date d = new Date(txtDate);
+                                Date d = new Date(txtDate);
+                                User userNew = new User(txtName, txtSurname, txtUser, txtPassword, d, txtEmail, Integer.parseInt(txtPhone));
+                                functions.insertNewUser(userNew);
 
-                    User userNew = new User(txtName, txtSurname, txtUser, txtPassword, d, txtEmail, Integer.parseInt(txtPhone));
-                    functions.insertNewUser(userNew);
-
-                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-
-                } catch (UserAlreadyExists userAlreadyExists) {
-                    functions.alertDisplay(builder, "Erregistro txarto", userAlreadyExists.getMessage(), "Berriro sahiatu");
-                }
-                catch (PasswordDoNotMatch passwordDoNotMatch) {
-                    functions.alertDisplay(builder, "Erregistro txarto", passwordDoNotMatch.getMessage(), "Berriro sahiatu");
+                                functions.alertDisplayWithListener(builder, "Erregistro ondo", "Erabiltzailea ondo sortu da!", "Hurrengoa", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
+                            } catch (PasswordDoNotMatch | UserAlreadyExists error) {
+                                functions.alertDisplay(builder, "Erregistro txarto", error.getMessage(), "Berriro sahiatu");
+                            }
+                        }
+                    });
                 } catch (NullField nullField) {
                     functions.alertDisplay(builder, "Erregistro txarto", nullField.getMessage(), "Berriro sahiatu");
                 }

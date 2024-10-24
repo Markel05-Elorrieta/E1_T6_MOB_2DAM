@@ -37,10 +37,7 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-/*
-        UserDao userDao = new UserDao();
-        ArrayList<User> usersList = userDao.getUsers();
-*/
+
         Boolean cacheUserExist = false;
         Cache cache = new Cache();
 

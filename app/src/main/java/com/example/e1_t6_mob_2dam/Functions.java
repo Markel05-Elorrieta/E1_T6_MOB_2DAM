@@ -25,26 +25,6 @@ public class Functions {
     private ConectionDB conectionDB = new ConectionDB();
     private User user;
 
-    // Comprobar error
-    public User searchUserDB (String userIn) throws UserNotFound {
-        for (int i = 0; i < GlobalVariables.usersDB.size(); i++) {
-            if (GlobalVariables.usersDB.get(i).getErabiltzailea().equals(userIn)) {
-                 User userAux = GlobalVariables.usersDB.get(i);
-                return userAux;
-            }
-        }
-        throw new UserNotFound();
-    }
-/*
-    public void checkLogin(String userIn, String passwordIn) throws ErrorWrongPassword, UserNotFound {
-        User userDB = searchUserDB(userIn);
-        if (!BCrypt.checkpw(passwordIn, userDB.getPasahitza())){
-            throw new ErrorWrongPassword();
-        } else {
-            GlobalVariables.logedUser = userDB;
-        }
-    }
-*/
     public void checkLogin(User userDB, String passwordIn) throws ErrorWrongPassword, UserNotFound {
        Log.d("pruebabasedatos", userDB.toString());
         if (userDB.getErabiltzailea() == null) {
@@ -57,16 +37,12 @@ public class Functions {
         }
     }
 
-    public void checkRegister (String userIn, String passwordIn, String password2In) throws PasswordDoNotMatch, UserAlreadyExists {
-
-        try {
-            User userDB = searchUserDB(userIn);
+    public void checkRegister (User userDB, String passwordIn, String password2In) throws PasswordDoNotMatch, UserAlreadyExists {
+        /** Falta comprobar la fecha, telefono...**/
+        if (userDB.getErabiltzailea() != null){
             throw new UserAlreadyExists();
-        } catch (UserNotFound e) {
-            if (!passwordIn.equals(password2In)) {
-                throw new PasswordDoNotMatch();
-            }
-            // comprobar fecha (falta!!)
+        } else if (!passwordIn.equals(password2In)){
+            throw new PasswordDoNotMatch();
         }
     }
 
@@ -104,52 +80,12 @@ public class Functions {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-    /*
-    ConectionDB conection = new ConectionDB();
-    public boolean checkLoginDB(String userIn, String passwordIn, AlertDialog.Builder builder) throws Exception, ErrorPasahitzaTxarto, ErrorUserNotFound {
-        Log.d("MainActivity", "Este es un mensaje de debug");
-        FirebaseFirestore db = conection.getConnection();
 
-        db.collection("usuarios").whereEqualTo("erabiltzailea", userIn)
-                .get().addOnSuccessListener(queryDocumentSnapshots -> {
-                    List<DocumentSnapshot> userDB = queryDocumentSnapshots.getDocuments();
-                    if (userDB.isEmpty()){
-
-                        builder.setTitle("Login txarto");
-                        builder.setMessage("Login error empty");
-                        builder.setPositiveButton("Berriro sahiatu", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-
-                        return;
-                    }
-
-                    String passwordDB = userDB.get(0).getString("pasahitza");
-                    String toDelete = "$2a$10$cf6rk5UVQldMoOtWMvx8TuhPplfr2BIoYCaEeTqiI74BOfNBfWkW6";
-
-                    if (!passwordDB.equals(toDelete)){
-                        builder.setTitle("Login txarto");
-                        builder.setMessage("Login error psw");
-                        builder.setPositiveButton("Berriro sahiatu", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-
-                        return;
-                    }
-                });
-
-        conection.closeConnection(db);
-        return true;
+    public void alertDisplayWithListener(AlertDialog.Builder builder, String title, String msg, String msgBtn, DialogInterface.OnClickListener listener){
+        builder.setTitle(title);
+        builder.setMessage(msg);
+        builder.setPositiveButton(msgBtn, listener);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
-    */
 }

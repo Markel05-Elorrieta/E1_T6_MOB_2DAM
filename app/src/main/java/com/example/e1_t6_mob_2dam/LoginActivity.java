@@ -31,6 +31,11 @@ import objects.Workout;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private Functions functions = new Functions();
+    private UserDao userDao = new UserDao();
+    private WorkoutDao workoutDao = new WorkoutDao();
+    private Cache cache = new Cache();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,54 +54,39 @@ public class LoginActivity extends AppCompatActivity {
         CheckBox rememberIn = findViewById(R.id.cbLogin_remember);
         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
 
-        Functions functions = new Functions();
-        Cache cache = new Cache();
-
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                userDao.searchUserDBByUser(userIn.getText().toString(), new UserCallBack() {
+                    @Override
+                    public void userRetrieved(User userOut) {
+                        try {
+                            functions.checkLogin(userOut, passwordIn.getText().toString());
 
-                    //functions.checkLogin(userIn.getText().toString(), passwordIn.getText().toString());
-
-                    UserDao userDao = new UserDao();
-                    userDao.searchUserDBByUser(userIn.getText().toString(), new UserCallBack() {
-                            @Override
-                            public void userRetrieved(User userOut) {
-                                try {
-                                    functions.checkLogin(userOut, passwordIn.getText().toString());
-
-                                    if (rememberIn.isChecked()){
-                                        Log.d("entro", "entro");
-                                        cache.put("rememberUser", GlobalVariables.logedUser.getErabiltzailea());
-                                    }
-
-                                    WorkoutDao workoutDao = new WorkoutDao();
-                                    workoutDao.getWorkouts(new WorkoutCallBack() {
-                                        @Override
-                                        public void onWorkoutsRetrieved(ArrayList<Workout> workouts) {
-                                            // Proceed to WorkoutsActivity only after the workouts are retrieved
-                                            Intent intent = new Intent(LoginActivity.this, WorkoutsActivity.class);
-                                            startActivity(intent);
-                                            finish(); // Optional: Call finish() if you want to close LoginActivity
-                                        }
-                                    });
-                                } catch (ErrorWrongPassword errorWrongPassword) {
-                                    functions.alertDisplay(builder, "Login txarto", errorWrongPassword.getMessage(), "Berriro sahiatu");
-                                } catch (UserNotFound userNotFound) {
-                                    functions.alertDisplay(builder, "Login txarto", userNotFound.getMessage(), "Berriro sahiatu");
-                                }
+                            /** CACHE **/
+                            /** Falta guardar el usuario entero en el cache **/
+                            /*********************
+                            if (rememberIn.isChecked()){
+                                Log.d("entro", "entro");
+                                cache.put("rememberUser", GlobalVariables.logedUser.getErabiltzailea());
                             }
-                        });
+                            *********************/
 
-
-
-
-/*
-                    Intent intent = new Intent(LoginActivity.this, WorkoutsActivity.class);
-                    startActivity(intent);
-                    finish();
-*/
-
+                            /** Plantear BD con ariketak, bajar workout y ariketas a la vez o bajar primero workout para mostrar, y luego al
+                             darle a un workout bajar las ariketas (como relacionar en BD para poder bajar bien las cosas)**/
+                            workoutDao.getWorkouts(new WorkoutCallBack() {
+                                @Override
+                                public void onWorkoutsRetrieved(ArrayList<Workout> workouts) {
+                                    Intent intent = new Intent(LoginActivity.this, WorkoutsActivity.class);
+                                    startActivity(intent);
+                                    finish(); // Optional: Call finish() if you want to close LoginActivity
+                                }
+                            });
+                        } catch (ErrorWrongPassword | UserNotFound error) {
+                            functions.alertDisplay(builder, "Login txarto", error.getMessage(), "Berriro sahiatu");
+                        }
+                    }
+                });
             }
         });
 
