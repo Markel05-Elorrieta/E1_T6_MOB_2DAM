@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Workout {
     private String izena;
-    private double maila;
+    private int maila;
     private String videoURL;
     private int ariketaCount;
 
     public Workout() {
     }
 
-    public Workout(String izena, double maila, String videoURL, int ariketaCount) {
+    public Workout(String izena, int maila, String videoURL, int ariketaCount) {
         this.izena = izena;
         this.videoURL = videoURL;
         this.maila = maila;
@@ -34,11 +34,11 @@ public class Workout {
         this.videoURL = videoURL;
     }
 
-    public double getMaila() {
+    public int getMaila() {
         return maila;
     }
 
-    public void setMaila(double maila) {
+    public void setMaila(int maila) {
         this.maila = maila;
     }
 

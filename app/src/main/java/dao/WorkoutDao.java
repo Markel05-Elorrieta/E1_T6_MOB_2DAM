@@ -40,7 +40,7 @@ public class WorkoutDao {
                                     if (document.getDouble("maila") <= GlobalVariables.logedUser.getMaila()) {
                                         Workout workout = new Workout();
                                         workout.setIzena(document.getString("izena"));
-                                        workout.setMaila(document.getDouble("maila"));
+                                        workout.setMaila(document.getDouble("maila").intValue());
                                         workout.setVideoURL(document.getString("video_url"));
                                         workout.setAriketaCount(ariketakTask.getResult().size());
                                         workoutsDB.add(workout);

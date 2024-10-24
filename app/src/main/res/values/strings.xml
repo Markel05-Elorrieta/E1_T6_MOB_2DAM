@@ -5,7 +5,7 @@
     <string name="txt_btnLogin">LOGIN</string>
     <string name="txt_btnRegister">ERREGISTRATU</string>
     <string name="txt_cbSaioaGogoratu">Saioa gogoratu</string>
-
+    <string name="txt_lblWorkouts">WORKOUTS</string>
     <string name="txt_lblPassword2">Pasahitza errepikatu</string>
     <string name="txt_lblBerria">Berria zara? Erregistratu hemen.</string>
     <string name="txt_lblName">Izena</string>
@@ -14,6 +14,7 @@
     <string name="txt_lblPhone">Telefonoa</string>
     <string name="txt_lblDate">Jaiotze-data</string>
     <string name="txt_btnAtzera">Atzera</string>
+    <string name="txt_lblWorkoutInfo_Header">WORKOUT INFORMAZIOA</string>
 
     <string name="txt_btnHasi">Hasi!</string>
 

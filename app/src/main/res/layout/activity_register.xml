@@ -206,8 +206,8 @@
 
     <EditText
         android:id="@+id/dtRegister_date"
-        android:layout_width="242dp"
-        android:layout_height="46dp"
+        android:layout_width="362dp"
+        android:layout_height="57dp"
         android:ems="10"
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
