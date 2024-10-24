@@ -38,8 +38,7 @@ public class WorkoutsActivity extends AppCompatActivity {
             return insets;
         });
 
-        WorkoutDao workoutDao = new WorkoutDao();
-        workoutDao.getWorkouts();
+
 
         RecyclerView rv = findViewById(R.id.rvWorkout_list);
         FloatingActionButton atzeraButton = (FloatingActionButton) findViewById(R.id.btnAtzera);

@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         UserDao userDao = new UserDao();
         ArrayList<User> usersList = userDao.getUsers();
 
+
+
         Boolean cacheUserExist = false;
         Cache cache = new Cache();
 

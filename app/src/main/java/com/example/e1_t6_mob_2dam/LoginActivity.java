@@ -25,6 +25,8 @@ import exceptions.UserNotFound;
 import objects.Cache;
 import objects.Workout;
 
+
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -37,9 +39,6 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        UserDao userDao = new UserDao();
-        userDao.getUsers();
 
         Button btnLogin = (Button) findViewById(R.id.btnLogin_login);
         Button btnRegister = (Button) findViewById(R.id.btnLogin_register);
@@ -62,10 +61,21 @@ public class LoginActivity extends AppCompatActivity {
                         cache.put("rememberUser", GlobalVariables.logedUser.getErabiltzailea());
                     }
 
+                    WorkoutDao workoutDao = new WorkoutDao();
+                    workoutDao.getWorkouts(new WorkoutCallBack() {
+                        @Override
+                        public void onWorkoutsRetrieved(ArrayList<Workout> workouts) {
+                            // Proceed to WorkoutsActivity only after the workouts are retrieved
+                            Intent intent = new Intent(LoginActivity.this, WorkoutsActivity.class);
+                            startActivity(intent);
+                            finish(); // Optional: Call finish() if you want to close LoginActivity
+                        }
+                    });
+/*
                     Intent intent = new Intent(LoginActivity.this, WorkoutsActivity.class);
                     startActivity(intent);
                     finish();
-
+*/
                 } catch (UserNotFound errorUserNotFound) {
                     functions.alertDisplay(builder, "Login txarto", errorUserNotFound.getMessage(), "Berriro sahiatu");
                 } catch (ErrorWrongPassword errorWrongPassword) {
