@@ -69,8 +69,8 @@
 
     <EditText
         android:id="@+id/ptRegister_user"
-        android:layout_width="160dp"
-        android:layout_height="41dp"
+        android:layout_width="181dp"
+        android:layout_height="46dp"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -131,7 +131,7 @@
 
     <EditText
         android:id="@+id/ptRegister_password"
-        android:layout_width="145dp"
+        android:layout_width="183dp"
         android:layout_height="52dp"
         android:ems="10"
         android:inputType="textPassword"
@@ -144,21 +144,20 @@
 
     <EditText
         android:id="@+id/ptRegister_password2"
-        android:layout_width="158dp"
-        android:layout_height="53dp"
+        android:layout_width="172dp"
+        android:layout_height="50dp"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/lbl_password2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.49" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etRegister_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="364dp"
+        android:layout_height="49dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -191,7 +190,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvRegister_phone"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.904" />
+        app:layout_constraintVertical_bias="0.89" />
 
     <TextView
         android:id="@+id/tvRegister_phone"
@@ -207,8 +206,8 @@
 
     <EditText
         android:id="@+id/dtRegister_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="242dp"
+        android:layout_height="46dp"
         android:ems="10"
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -220,15 +219,14 @@
 
     <Button
         android:id="@+id/btnRegister_register"
-        android:layout_width="152dp"
-        android:layout_height="67dp"
+        android:layout_width="153dp"
+        android:layout_height="52dp"
         android:text="@string/txt_btnRegister"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.304"
-        app:layout_constraintStart_toEndOf="@+id/ptRegister_phone"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975" />
+        app:layout_constraintVertical_bias="0.976" />
 
     <TextView
         android:id="@+id/tvRegister_date"
@@ -242,14 +240,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.568" />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnRegister_atzera"
-        android:layout_width="97dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/txt_btnAtzera"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:srcCompat="?attr/actionModeCloseDrawable"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="17dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

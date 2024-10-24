@@ -1,5 +1,7 @@
 package com.example.e1_t6_mob_2dam;
 
+import static com.example.e1_t6_mob_2dam.R.id.btnAtzera;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +17,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import objects.Workout;
 
@@ -32,8 +36,8 @@ public class WorkoutsActivity extends AppCompatActivity {
         });
 
         RecyclerView rv = findViewById(R.id.rvWorkout_list);
-        Button w = (Button) findViewById(R.id.button54);
-        w.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton atzeraButton = (FloatingActionButton) findViewById(R.id.btnAtzera);
+        atzeraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(WorkoutsActivity.this, LoginActivity.class);

@@ -14,7 +14,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="start" />
+        android:gravity="start"
+        android:textSize="20sp" />
 
     <!-- TextView en el centro -->
     <TextView
@@ -22,7 +23,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textSize="20sp" />
 
     <!-- TextView en la derecha -->
     <TextView
@@ -30,6 +32,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="end"/>
+        android:gravity="end"
+        android:textSize="20sp" />
 
 </LinearLayout>

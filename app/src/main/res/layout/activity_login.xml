@@ -9,9 +9,11 @@
 
     <TextView
         android:id="@+id/tvLogin_appName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="67dp"
+        android:layout_height="22dp"
         android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,9 +34,10 @@
 
     <TextView
         android:id="@+id/tvLogin_user"
-        android:layout_width="124dp"
-        android:layout_height="20dp"
+        android:layout_width="141dp"
+        android:layout_height="28dp"
         android:text="@string/txt_lblUser"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.16"
@@ -44,13 +47,27 @@
 
     <TextView
         android:id="@+id/tvLogin_password"
-        android:layout_width="124dp"
-        android:layout_height="22dp"
+        android:layout_width="127dp"
+        android:layout_height="28dp"
         android:text="@string/txt_lblPassword"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/ptLogin_user"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.482" />
+
+    <TextView
+        android:id="@+id/tvLogin_password2"
+        android:layout_width="361dp"
+        android:layout_height="29dp"
+        android:text="@string/txt_lblBerria"
+        android:textAlignment="center"
+        android:textSize="19sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.86" />
 
     <EditText
         android:id="@+id/ptLogin_user"
@@ -58,6 +75,7 @@
         android:layout_height="50dp"
         android:ems="10"
         android:inputType="text"
+        android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tvLogin_user"
         app:layout_constraintTop_toTopOf="parent"
@@ -69,6 +87,7 @@
         android:layout_height="50dp"
         android:ems="10"
         android:inputType="textPassword"
+        android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tvLogin_password"
         app:layout_constraintTop_toBottomOf="@+id/tvLogin_password"
@@ -76,16 +95,16 @@
 
     <Button
         android:id="@+id/btnLogin_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="111dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="20dp"
         android:text="@string/txt_btnLogin"
+        android:textSize="17sp"
         app:layout_constraintBottom_toTopOf="@+id/btnLogin_register"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.998" />
+        app:layout_constraintVertical_bias="0.912" />
 
     <Button
         android:id="@+id/btnLogin_register"
@@ -96,13 +115,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.894" />
+        app:layout_constraintVertical_bias="0.951" />
 
     <CheckBox
         android:id="@+id/cbLogin_remember"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="166dp"
+        android:layout_height="57dp"
         android:text="@string/txt_cbSaioaGogoratu"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/ptLogin_password"
         app:layout_constraintTop_toTopOf="parent"

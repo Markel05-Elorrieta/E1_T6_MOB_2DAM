@@ -14,6 +14,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.Date;
 import java.util.HashMap;
 
@@ -53,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText emailIn = (EditText) findViewById(R.id.etRegister_email);
         EditText phoneIn = (EditText) findViewById(R.id.ptRegister_phone);
         Button btnRegister = (Button) findViewById(R.id.btnRegister_register);
-        Button btnAtzera = (Button) findViewById(R.id.btnRegister_atzera);
+        FloatingActionButton btnAtzera = (FloatingActionButton) findViewById(R.id.btnRegister_atzera);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
