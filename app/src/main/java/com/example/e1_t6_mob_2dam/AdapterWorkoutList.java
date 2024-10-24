@@ -1,6 +1,9 @@
 package com.example.e1_t6_mob_2dam;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +58,9 @@ public class AdapterWorkoutList extends RecyclerView.Adapter<AdapterWorkoutList.
         // Set click listener for the item
         holder.itemView.setOnClickListener(view -> {
             Log.d("Workout Clicked", "Workout clicked: " + currentWorkout.getIzena());
+            Intent intent = new Intent(context, WorkoutInfoActivity.class);
+            GlobalVariables.currentWorkout = currentWorkout;
+            context.startActivity(intent);
         });
     }
 

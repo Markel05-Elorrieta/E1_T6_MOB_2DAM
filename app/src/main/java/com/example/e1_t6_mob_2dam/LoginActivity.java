@@ -60,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("entro", "entro");
                         cache.put("rememberUser", GlobalVariables.logedUser.getErabiltzailea());
                     }
-
                     Intent intent = new Intent(LoginActivity.this, WorkoutsActivity.class);
                     startActivity(intent);
                     finish();
