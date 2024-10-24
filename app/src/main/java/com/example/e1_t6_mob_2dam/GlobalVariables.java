@@ -9,7 +9,7 @@ import objects.User;
 import objects.Workout;
 
 public class GlobalVariables {
-    public static User logedUser = null;
+    public static User logedUser = new User();
     public static ArrayList<User> usersDB = new ArrayList<User>();
     public static ArrayList<Workout> workoutsDB = new ArrayList<Workout>();
 }

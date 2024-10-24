@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         Functions functions = new Functions();
         Cache cache = new Cache();
         WorkoutDao workoutDao = new WorkoutDao();
+        workoutDao.getWorkouts();
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,8 +60,6 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("entro", "entro");
                         cache.put("rememberUser", GlobalVariables.logedUser.getErabiltzailea());
                     }
-
-                    workoutDao.getWorkouts();
 
                     Intent intent = new Intent(LoginActivity.this, WorkoutsActivity.class);
                     startActivity(intent);

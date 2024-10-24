@@ -71,7 +71,7 @@ public class Functions {
         userNewHashMap.put("email", userNew.getEmail());
         userNewHashMap.put("maila", userNew.getMaila());
         userNewHashMap.put("telefonoa", userNew.getTelefonoa());
-        userNewHashMap.put("jaiotze-data", userNew.getJaiotze_data());
+        userNewHashMap.put("jaiotze_data", userNew.getJaiotze_data());
 
         db.collection("erabiltzaileak").add(userNewHashMap).addOnSuccessListener(documentReference -> {
                     Log.d("Firestore", "DocumentSnapshot added with ID: " + documentReference.getId());
