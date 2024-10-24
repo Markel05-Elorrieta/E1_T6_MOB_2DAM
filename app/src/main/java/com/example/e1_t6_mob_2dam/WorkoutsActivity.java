@@ -20,6 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
+import dao.WorkoutDao;
 import objects.Workout;
 
 public class WorkoutsActivity extends AppCompatActivity {
@@ -34,6 +37,9 @@ public class WorkoutsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        WorkoutDao workoutDao = new WorkoutDao();
+        workoutDao.getWorkouts();
 
         RecyclerView rv = findViewById(R.id.rvWorkout_list);
         FloatingActionButton atzeraButton = (FloatingActionButton) findViewById(R.id.btnAtzera);

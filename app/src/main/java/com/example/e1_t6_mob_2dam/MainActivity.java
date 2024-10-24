@@ -20,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.ArrayList;
 
 import dao.UserDao;
+import dao.WorkoutDao;
 import exceptions.UserNotFound;
 import exceptions.ErrorWrongPassword;
 import objects.Cache;

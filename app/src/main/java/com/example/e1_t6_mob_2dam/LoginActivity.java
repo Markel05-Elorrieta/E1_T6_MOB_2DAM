@@ -3,6 +3,7 @@ package com.example.e1_t6_mob_2dam;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.ArrayList;
 
 import dao.UserDao;
 import dao.WorkoutDao;
@@ -47,8 +50,6 @@ public class LoginActivity extends AppCompatActivity {
 
         Functions functions = new Functions();
         Cache cache = new Cache();
-        WorkoutDao workoutDao = new WorkoutDao();
-        workoutDao.getWorkouts();
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("entro", "entro");
                         cache.put("rememberUser", GlobalVariables.logedUser.getErabiltzailea());
                     }
+
                     Intent intent = new Intent(LoginActivity.this, WorkoutsActivity.class);
                     startActivity(intent);
                     finish();
@@ -71,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
